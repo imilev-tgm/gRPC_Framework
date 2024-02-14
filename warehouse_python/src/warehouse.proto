@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package warehouse;
+
+// Definiert eine Nachricht für Produktinformationen
+message ProductData {
+  string product_id = 1;
+  string product_name = 2;
+  string product_category = 3;
+  string product_amount = 4;
+  string product_unit = 5;
+}
+
+// Definiert eine Nachricht für Warehouse-Daten
+message WarehouseData {
+  string warehouse_id = 1;
+  string warehouse_name = 2;
+  string warehouse_country = 3;
+  string warehouse_city = 4;
+  string address = 5;
+  string timestamp = 6;
+  repeated ProductData product_data = 7;
+}
+
+// Der Service bietet eine Methode, um Warehouse-Daten zu erhalten
+service WarehouseService {
+  rpc GetWarehouseData(GetWarehouseDataRequest) returns (WarehouseData) {}
+}
+
+// Die Anfrage-Nachricht benötigt keine Felder für diese einfache Operation
+message GetWarehouseDataRequest {
+}

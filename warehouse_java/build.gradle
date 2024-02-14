@@ -1,0 +1,53 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.2.2'
+	id 'io.spring.dependency-management' version '1.1.4'
+	id "com.google.protobuf" version "0.9.4"
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '17'
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	// https://mvnrepository.com/artifact/com.google.protobuf/protobuf-java
+	implementation group: 'com.google.protobuf', name: 'protobuf-java', version: '3.25.2'
+	implementation 'org.springframework.boot:spring-boot-starter'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	runtimeOnly 'io.grpc:grpc-netty-shaded:1.61.0'
+	implementation 'io.grpc:grpc-protobuf:1.61.0'
+	implementation 'io.grpc:grpc-stub:1.61.0'
+	compileOnly 'org.apache.tomcat:annotations-api:6.0.53' // necessary for Java 9+
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+protobuf {
+	generateProtoTasks {
+		{ task ->
+			task.plugins {
+				grpc {
+					// Use subdirectory 'grpcjava' instead of the default 'grpc'
+					outputSubDir = 'grpcjava'
+				}
+			}
+		}
+	}
+}
+
+sourceSets {
+	main {
+		java {
+			srcDirs 'build/generated/source/proto/main/java', 'src/main/java'
+		}
+	}
+}
