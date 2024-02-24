@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package tradearea;
+
+// Definition für ProductData
+message ProductData {
+  string productId = 1;
+  string productName = 2;
+  string productCategory = 3;
+  string productAmount = 4;
+  string productUnit = 5;
+}
+
+// Definition für WarehouseData
+message WarehouseData {
+  string warehouseID = 1;
+  string warehouseName = 2;
+  string timestamp = 3;
+  string warehouseCountry = 4;
+  string warehouseCity = 5;
+  string address = 6;
+  repeated ProductData productData = 7;
+}
+
+// Service-Definition
+service WarehouseService {
+  rpc GetWarehouseData (WarehouseRequest) returns (WarehouseData) {}
+}
+
+// Anfrageformat für WarehouseData
+message WarehouseRequest {
+  string warehouseID = 1;
+}

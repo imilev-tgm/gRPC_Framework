@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package grpc;
+
+// Der GreetingService definiert einen RPC-Dienst mit einer Methode sayHello.
+service GreetingService {
+  // sayHello ist eine Methode, die eine HelloRequest-Nachricht nimmt und eine HelloReply-Nachricht zurückgibt.
+  rpc sayHello (HelloRequest) returns (HelloReply) {}
+}
+
+// HelloRequest ist die Anfrage-Nachricht mit einem Namen.
+message HelloRequest {
+  string name = 1;
+}
+
+// HelloReply ist die Antwort-Nachricht mit einer Begrüßung.
+message HelloReply {
+  string message = 1;
+}

@@ -1,25 +1,22 @@
 package com.example.demo;
 
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import com.example.proto.PersonOuterClass;
-
-
+import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class DemoApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
-
-		// Beispiel, wie Sie die Person-Klasse verwenden könnten
-		PersonOuterClass.Person person = PersonOuterClass.Person.newBuilder()
-				.setName("John Doe")
-				.setAge(1234)
-				.build();
-
-		System.out.println(person);
-		// Verwenden Sie die 'person'-Variable gemäß Ihren Anforderungen
 	}
 
+	@Bean
+	CommandLineRunner run(GrpcClient client) {
+		return args -> {
+			String response = client.sayHello("World");
+			System.out.println("Response from gRPC server: " + response);
+		};
+	}
 }

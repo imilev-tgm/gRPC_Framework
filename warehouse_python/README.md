@@ -82,7 +82,7 @@ proto enum ProductCategory {
 ### Generate code out of .proto files
 ```bash
 cd warehouse_python
-pipenv run python -m grpc_tools.protoc -I./src --python_out=./src --grpc_python_out=./src ./src/*.prot
+pipenv run python -m grpc_tools.protoc -I./src --python_out=./src --grpc_python_out=./src ./src/*.proto
 ```
 
 [0]: https://grpc.io/
